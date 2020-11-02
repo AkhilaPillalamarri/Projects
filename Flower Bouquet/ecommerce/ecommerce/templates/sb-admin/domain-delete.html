@@ -1,0 +1,21 @@
+{% extends 'sb-admin/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<div style="margin-left: 350px;" id="delete">
+
+<form method="post" id="delete">{% csrf_token %}
+  <div class="alert alert-danger" role="alert" style="width: 80%;">
+      Are you sure you want to delete "{{ request.build_absolute_uri|slice:"7:-10" }}" ?
+      <input class="btn btn-danger" type="submit" value="Submit" /><a class="btn btn-success" href="/new/{{request.tenant.id}}">Cancel</a>
+  </div>
+  </form>
+</div>
+{% endblock %}
+
+
+
+    
+    
+  </div>
+</div>

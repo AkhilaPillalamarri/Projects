@@ -1,0 +1,138 @@
+{% extends "myapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(".tb").hover(function () {
+
+            $(".tb").removeClass("tb-active");
+            $(this).addClass("tb-active");
+
+            current_fs = $(".active");
+
+            next_fs = $(this).attr('id');
+            next_fs = "#" + next_fs + "1";
+
+            $("fieldset").removeClass("active");
+            $(next_fs).addClass("active");
+
+            current_fs.animate({}, {
+                step: function () {
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    next_fs.css({
+                        'display': 'block'
+                    });
+                }
+            });
+        });
+
+    });
+</script>
+
+
+
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <div class="container-fluid px-sm-1 py-5 mx-auto">
+                    <div class="row justify-content-center">
+                        <div class="d-flex">
+                            <div class="card">
+                                <div class="d-flex flex-column thumbnails">
+                                    <div id="f1" class="tb tb-active">{% if product.image %} <img class="thumbnail-img fit-image"
+                                            src="/media/{{ product.image }}"> </div>{% else %}
+                                            <img class="thumbnail-img fit-image"
+                                            src="{% static 'home/images/download1.png' %}"> </div>
+                                            {% endif %}
+                                    <div id="f2" class="tb"> {% if product.image2 %}<img class="thumbnail-img fit-image"
+                                            src="/media/{{ product.image2 }}"> </div>{% else %}
+                                            <img class="thumbnail-img fit-image"
+                                            src="{% static 'home/images/download1.png' %}"> </div>
+                                            {% endif %}
+                                    <div id="f3" class="tb"> {% if product.image3 %}<img class="thumbnail-img fit-image"
+                                            src="/media/{{ product.image3 }}"> </div>{% else %}
+                                            <img class="thumbnail-img fit-image"
+                                            src="{% static 'home/images/download1.png' %}"> </div>
+                                            {% endif %}
+                                    <div id="f4" class="tb">{% if product.image4 %} <img class="thumbnail-img fit-image"
+                                            src="/media/{{ product.image4 }}"> </div>{% else %}
+                                            <img class="thumbnail-img fit-image"
+                                            src="{% static 'home/images/download1.png' %}"> </div>
+                                            {% endif %}
+                                </div>
+                                <fieldset id="f11" class="active">
+                                    <div class="product-pic"> <img class="pic0" src="/media/{{ product.image }}"> </div>
+                                </fieldset>
+                                <fieldset id="f21" class="">
+                                    <div class="product-pic"> <img class="pic0" src="/media/{{ product.image2 }}"> </div>
+                                </fieldset>
+                                <fieldset id="f31" class="">
+                                    <div class="product-pic"> <img class="pic0" src="/media/{{ product.image3 }}"> </div>
+                                </fieldset>
+                                <fieldset id="f41" class="">
+                                    <div class="product-pic"> <img class="pic0" src="/media/{{ product.image4 }}"> </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h6 class="cat">braclet collection </h6>
+                <h2 class="text-black">{{ product.title }}</h2>
+                <div class="text-black">
+                    <strong> Price: ${{ product.price }} </strong>
+                </div>
+
+                <p class="text-black">Stock: {{ product.stock }} units</p>
+                {% if product.in_stock %}
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type='submit' class="btn btn-lg btn-block btn-dark buy-now">Add to cart</button>
+                </form>
+                {% else %}
+                <p>This item is out of stock</p>
+                {% endif %}
+                <div class="call-customer-care text-black m-3" style="text-align: center;">
+
+                    <div class="content-asset">
+                        Enjoy complimentary shipping
+                    </div>
+                </div>
+                <hr style="background-color: black;">
+                <h6 class="text-black">PRODUCT DETAILS</h6>
+                <p class="text-dark">{{ product.description }}</p>
+                <hr style="background-color: black; ">
+                <ul class="menu social-wishlist">
+
+                    <li class="social">
+                        <ul id="social">
+                            <a href="" class="fb new-window-link">
+                                <i class="fab fa-facebook-square" style="color: black;"></i>
+                            </a>
+                            <a href="" class="fb new-window-link">
+                                <i class="fab fa-twitter-square" style="color: black; margin-left: 15px;"></i>
+                            </a>
+                            <a href="" class="fb new-window-link">
+                                <i class="fab fa-instagram-square" style="color: black; margin-left: 15px;"></i>
+                            </a>
+                            <a href="" class="fb new-window-link">
+                                <i class="fab fa-google-plus" style="color: black; margin-left: 15px;"></i>
+                            </a>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

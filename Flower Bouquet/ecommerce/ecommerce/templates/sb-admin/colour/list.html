@@ -1,0 +1,55 @@
+{% extends 'sb-admin/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div id="content-wrapper" class="d-flex flex-column">
+
+     
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Colour List</h1>
+          <p class="mb-4">All colours are listed on below <a target="_blank" href="/sb-admin/colour/create">Add new colours</a>.</p>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Colours</h6><h6 class="float-right"><a href="/sb-admin/colour/create" class="btn btn-primary">Add New</a></h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                    {% for product in product %}
+                    <tr>
+                      <td>{{product.id}}</td>
+                      <td>{{product.name}}</td>
+                      <td>
+                        <a class="text-primary mr-2" href="/sb-admin/colour/edit/{{product.id}}"><i class="fa fa-edit"></i></a>
+                        <a class="text-primary mr-2" href="/sb-admin/colour/delete/{{product.id}}"><i class="fa fa-trash"></i></a>
+                        
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'sb-admin/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    li {
+        display: inline;
+        color: black;
+    }
+
+    li a {
+        color: black;
+        font-family: 'Open Sans';
+        font-weight: 800;
+    }
+
+    li a i {
+        color: black;
+        font-family: 'Open Sans';
+    }
+</style>
+<div id="content-wrapper" class="d-flex flex-column">
+
+     
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Product List<a href="/cart/sort/?sort=bracelets" class="user-a"> Bracelets</a></h1>
+          <p class="mb-4">All products are listed on below <a target="_blank" href="/sb-admin/product/create">Add new products</a>.</p>
+          <div class="container-fluid">
+    <ul>
+    </ul>
+    <form method='get' action='/sb-admin/sort/' class="searchform order-lg-last">
+    <ul class="text-left" style="padding: 0; border-bottom: 1px solid black; width: 100%; ">
+
+        <li>
+            <a href="#" class="user-a">Sort By : </a>
+        </li>
+        
+        <li>
+
+			<select name="sort" id="sort">
+				<option value="">Price</option>
+			{% for product in product %}
+			  <option value="{{product.price}}">{{product.price}}</option>
+			{% endfor %}
+			</select>
+        </li>
+
+        <li>
+
+			<select name="sort" id="sort">
+				<option value="">Description</option>
+			{% for product in product %}
+			  <option value="{{product.description}}">{{product.description}}</option>
+			{% endfor %}
+			</select>
+        </li>
+
+        
+        <strong>|</strong>
+        
+
+        </li>
+    </ul>
+    <button></button>
+    </form>
+
+</div>
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Products</h6><h6 class="float-right"><a href="/sb-admin/product/create" class="btn btn-primary">Add New</a></h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th>Price</th>>
+                      <th>Stock</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                    {% for product in product %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{product.title}}</td>
+                      
+                      <td>{{product.description|slice:'0:50'}}</td>
+                      <td>{{product.price}}Rs.</td>
+                      <td>{{product.stock}}</td>
+                      <td><a href="/sb-admin/product/edit/{{product.id}}" class="btn btn-primary">View </a><a href="/sb-admin/product/delete/{{product.id}}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'sb-admin/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+
+<div id="content-wrapper" class="d-flex flex-column">
+
+     
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Customer List</h1>
+          <p class="mb-4">All customers are listed on below <a target="_blank" href="/sb-admin/customer/create">Add new Customer</a>.</p>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Customers</h6><h6 class="float-right"><a href="/sb-admin/customer/create" class="btn btn-primary">Add New</a></h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Username</th>
+                      <th>Email</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Date Joined</th>
+                      <th>Last Login</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                    {% for product in product %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                     
+ 
+
+
+                      <td>{{product.username}}</td>
+                      <td>{{product.email}}</td>
+                      <td>{{product.first_name}}</td>
+                      <td>{{product.last_name}}</td>
+                      
+                      <td>{{ product.date_joined }}</td>
+                      <td>{{ product.last_login }}</td>
+
+                      <td>
+                        <a class="text-primary mr-2" href="/sb-admin/customer/edit/{{product.id}}"><i class="fa fa-edit"></i></a>
+                        <a class="text-primary mr-2" href="/sb-admin/customer/delete/{{product.id}}"><i class="fa fa-trash"></i></a>
+                        
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+{% endblock %}

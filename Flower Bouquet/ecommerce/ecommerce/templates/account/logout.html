@@ -1,0 +1,55 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %}
+<style>
+	.container {
+		color: black;
+	}
+
+	.table {
+		padding: 30px 20px;
+		margin-top: 00px;
+		border: 2px solid black;
+	}
+</style>
+
+
+<div class="container mt-5">
+	<div class="row">
+
+		<!--Empty Col-->
+		<div class="col-md"></div>
+		<!--Empty Col-->
+
+		<!--Signout Col-->
+		<div class="col-md-10">
+			<div class="table table-bordered">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h1>{% trans "Sign Out" %}</h1>
+				<p>{% trans 'Are you sure you want to sign out?' %}</p>
+				<form method="post" action="{% url 'account_logout' %}">
+					{% csrf_token %}
+					{% if redirect_field_value %}
+					<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+					{% endif %}
+					<button type="submit" class="btn btn-dark">{% trans 'Sign Out' %}</button>
+				</form>
+			</div>
+		</div>
+		<!--Signout Col-->
+
+		<!--Empty Col-->
+		<div class="col-md"></div>
+		<!--Empty Col-->
+
+	</div>
+</div>
+
+
+{% endblock %}

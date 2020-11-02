@@ -1,0 +1,72 @@
+{% extends 'sb-admin/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div id="content-wrapper" class="d-flex flex-column">
+
+     
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Address List</h1>
+          <p class="mb-4">All address are listed on below <a target="_blank" href="/sb-admin/address/create">Add new address</a>.</p>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Address</h6><h6 class="float-right"><a href="/sb-admin/address/create" class="btn btn-primary">Add New</a></h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>User</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
+                      <th>Active</th>
+                      <th>Staff Status</th>
+                      <th>Superuser Status</th>
+                      <th>Last Login</th>
+                      <th>Date Joined</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                    {% for product in product %}
+                    <tr>
+                      <td>{{product.id}}</td>
+                      <td>{{product.username}}</td>
+                      <td>{{product.first_name}}</td>
+                      <td>{{product.last_name}}</td>
+                      <td>{{product.email}}</td>
+                      <td>{{product.active}}</td>
+                      <td>{{ product.stuff_status }}</td>
+                      <td>{{ product.superuser_status }}</td>
+                      <td>{{ product.last_login }}</td>
+                      <td>{{ product.date_joined }}</td>
+
+                      <td>
+                        <a class="text-primary mr-2" href="/sb-admin/user/edit/{{product.id}}"><i class="fa fa-edit"></i></a>
+                        <a class="text-primary mr-2" href="/sb-admin/user/delete/{{product.id}}"><i class="fa fa-trash"></i></a>
+                        
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+{% endblock %}

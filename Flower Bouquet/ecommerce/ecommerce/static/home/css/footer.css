@@ -1,0 +1,52 @@
+input {
+    letter-spacing: 1.25px;
+    height: 40px;
+    font-family: Avenir;
+    padding-left: 20px;
+    font-weight: 100;
+    font-size: .75rem;
+    transition: border .5s;
+    border: 1px solid transparent;
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+.pt_wish-list div form select {
+    margin-bottom: 15px;
+    width: 100%;
+}
+.pt_checkout input.error {
+    border: 1px solid #d21f1f;
+}
+.pt_checkout>#main input {
+    font-size: .875rem;
+}
+input.error {
+    border: 1px solid #d21f1f;
+}
+input {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: textfield;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(195, 195, 195));
+    border-image: initial;
+}
+
+label>span {
+    color: #000;
+}
