@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Your shopping cart
+{% endblock %}
+
+{% block content %}
+  <h1 style="font-variant-caps: all-petite-caps;">Your shopping cart</h1>
+{% if cart|length > 0 %}
+  <table class="cart" id="cart">
+    <thead>
+      <tr>
+        <th >Image</th>
+        <th >Product</th>
+        <th >Quantity</th>
+        <th >Remove</th>
+        <th >Unit price</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart %}
+        {% with product=item.product %}
+          <tr>
+            <td>
+              <a href="{{ product.get_absolute_url }}">
+                <img style="width:200px;height:200px;" src="{% if product.image %}{{ product.image.url }}
+                {% else %}{% static "img/no_image.png" %}{% endif %}">
+              </a>
+            </td>
+            <td>{{ product.name }}</td>
+            <td>
+            <form action="{% url "cart:cart_add" product.id %}" method="post">
+                {{ item.update_quantity_form.quantity }}
+                {{ item.update_quantity_form.update }}
+                <input class="btn btn-success" style="background-color: #003366;border: currentColor" type="submit" value="Update">
+                {% csrf_token %}
+            </form>
+</td>
+            <td><a style="color:crimson" href="{% url "cart:cart_remove" product.id %}">Remove</a></td>
+            <td class="num">${{ item.price }}</td>
+            <td class="num" style="color: #003366;font-weight: bold">${{ item.total_price }}</td>
+          </tr>
+        {% endwith %}
+      {% endfor %}
+      <tr class="total" style="background-color: grey;
+  color: white;">
+
+        <td colspan="4"></td>
+          <td>Total</td>
+        <td class="num" style="color: mediumspringgreen;font-weight: bold">${{ cart.get_total_price }}</td>
+      </tr>
+    </tbody>
+  </table>
+    <br>
+
+  <p class="text-right">
+    <a href="{% url "shop:product_list" %}" class="btn btn-success" style="background-color: #003366;border: currentColor">Continue shopping</a>
+    <a href="{% url "orders:order_create" %}" class="btn btn-success" style="background-color: #003366;border: currentColor">Checkout</a>
+  </p>
+    {% else %}
+    <p style="font-weight: bold; font-style: italic;font-size: x-large;color: crimson">Your cart is empty.</p>
+        {% endif %}
+    <style>
+#cart th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: grey;
+  color: white;
+    width: 20%;
+}
+    #cart  th {
+  border: 1px solid grey;
+  padding: 8px;
+}
+
+    </style>
+{% endblock %}
